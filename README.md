@@ -1,4 +1,4 @@
-# maro
+# pet-store
 
 ## Project setup
 ```
