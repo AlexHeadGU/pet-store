@@ -2,7 +2,8 @@
   <div class="v-catalog">
     <h1>Catalog</h1>
     <div class="v-catalog__list">
-      <v-catalog-item v-for="product in products" :key="product.article" :product_data="product" />
+      <v-catalog-item v-for="product in products" :key="product.article" :product_data="product"
+        @sendArticle="showChildArticleInConsole" />
     </div>
   </div>
 </template>
@@ -70,7 +71,12 @@ export default {
       ]
     }
   },
-  computed: {}
+  computed: {},
+  methods: {
+    showChildArticleInConsole(data) {
+      console.log(data)
+    }
+  }
 }
 </script>
   
