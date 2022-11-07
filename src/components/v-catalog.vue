@@ -35,8 +35,12 @@ export default {
     }
   },
   mounted() {
-    console.log("dwdw");
-    this.$store.dispatch('GET_PRODUCTS_FROM_API');
+    this.$store.dispatch('GET_PRODUCTS_FROM_API')
+      .then((response) => {
+        if (response.data) {
+          console.log('Data arrived!')
+        }
+      })
   }
 }
 </script>
