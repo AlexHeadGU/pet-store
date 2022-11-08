@@ -39,7 +39,6 @@ export default {
   },
   mounted() {
     const cart_item_data = reactive(this.cart_item_data);
-    cart_item_data.quantity = 1
   }
 }
 </script>
