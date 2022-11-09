@@ -56,13 +56,9 @@ export default {
       this.ADD_TO_CART(data);
     },
     filterByCategories(category) {
-      this.filtredProducts = [];
-      let vm = this;
-      this.PRODUCTS.map(function (item) {
-        if (item.category === category.name) {
-          vm.filtredProducts.push(item)
-        }
-      });
+      this.filtredProducts = this.PRODUCTS.filter(item => {
+        return item.category === category.name
+      })
       this.selected = category.name;
     }
   },
