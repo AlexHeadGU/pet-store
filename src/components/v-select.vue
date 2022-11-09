@@ -53,9 +53,11 @@ export default {
   position: relative;
   width: 200px;
   cursor: pointer;
+  text-align: left;
 
   .title {
     border: solid 1px #aeaeae;
+    padding: $padding;
   }
 
   p {
@@ -65,8 +67,10 @@ export default {
 
 .options {
   border: solid 1px #aeaeae;
+  background: #ffffff;
   position: absolute;
   top: 30px;
+  left: 0;
   right: 0;
   width: 100%;
 
