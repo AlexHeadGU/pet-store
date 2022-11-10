@@ -1,7 +1,7 @@
 <template>
   <div class="v-select">
     <p class="title" @click="areOptionsVisible = !areOptionsVisible">{{ selected }}</p>
-    <div class="options" v-if="areOptionsVisible">
+    <div class="options" v-if="areOptionsVisible || isExpanded">
       <p v-for="option in options" :key="option.value" @click="selectOption(option)">
         {{ option.name }}
       </p>
@@ -22,6 +22,10 @@ export default {
     selected: {
       type: String,
       default: ''
+    },
+    isExpanded: {
+      type: Boolean,
+      default: false
     }
   },
   data() {

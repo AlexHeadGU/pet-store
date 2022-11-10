@@ -4,7 +4,7 @@
       <div class="v-catalog__link_to_cart">Cart: {{ CART.length }}</div>
     </router-link>
     <h1>Catalog</h1>
-    <v-select :selected="selected" :options="categories" @selectOption="filterByCategories" />
+    <v-select :selected="selected" :options="categories" @selectOption="filterByCategories" :isExpanded="IS_DESKTOP" />
     <div class="v-catalog__list">
       <v-catalog-item v-for="product in sortedProducts" :key="product.article" :product_data="product"
         @addToCart="addToCart" />
@@ -38,7 +38,9 @@ export default {
   computed: {
     ...mapGetters([
       'PRODUCTS',
-      'CART'
+      'CART',
+      'IS_MOBILE',
+      'IS_DESKTOP'
     ]),
     sortedProducts() {
       if (this.filtredProducts.length) {
