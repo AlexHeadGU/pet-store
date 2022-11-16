@@ -1,7 +1,7 @@
 <template>
   <div class="v-select">
     <p class="title" @click="areOptionsVisible = !areOptionsVisible">{{ selected }}</p>
-    <div class="options" v-if="areOptionsVisible || isExpanded">
+    <div class="options" v-if="areOptionsVisible || !isExpanded">
       <p v-for="option in options" :key="option.value" @click="selectOption(option)">
         {{ option.name }}
       </p>
@@ -38,6 +38,7 @@ export default {
     selectOption(option) {
       this.$emit('selectOption', option);
       this.areOptionsVisible = false;
+      // this.selected = option.
     },
     hideSelect() {
       this.areOptionsVisible = false;
