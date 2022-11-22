@@ -32,10 +32,8 @@ export default {
     window.addEventListener('resize', () => {
       if (window.innerWidth > 767) {
         this.SET_DESKTOP();
-        console.log('Desktop', this.IS_DESKTOP);
       } else {
         this.SET_MOBILE();
-        console.log('Mobile', this.IS_MOBILE);
       }
     })
   }
