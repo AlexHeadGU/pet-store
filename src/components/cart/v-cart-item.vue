@@ -3,7 +3,7 @@
     <img class="v-cart-item__image" :src="require('@/assets/images/' + cart_item_data.image)" alt="img">
     <div class="v-cart-item__info">
       <p>{{ cart_item_data.name }}</p>
-      <p>{{ cart_item_data.price }}</p>
+      <p>{{ formattedPrice }}</p>
       <p>{{ cart_item_data.article }}</p>
     </div>
     <div class="v-cart-item__quantity">
@@ -33,7 +33,17 @@ export default {
   data() {
     return {}
   },
-  computed: {},
+  computed: {
+    formattedPrice() {
+      let parts = this.cart_item_data.price.toFixed(2).toString().split('.');
+      parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+      return parts.join(".") + ' ₽';
+    },
+
+    // fixedPrice() {
+    //   return this.cart_item_data.price.toFixed(2);
+    // }
+  },
   methods: {
     decrementItem() {
       this.$emit('decrement')

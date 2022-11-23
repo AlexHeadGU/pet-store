@@ -43,7 +43,6 @@ export default {
   mounted() {
     document.addEventListener('click', (item) => {
       if (item.target === this.$refs['popup_wrapper']) {
-        console.log(item.target)
         this.closePopup();
       }
     })

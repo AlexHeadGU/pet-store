@@ -1,5 +1,8 @@
 <template>
   <div class="v-catalog">
+
+    <v-notification :messages="messages" />
+
     <router-link :to="{ name: 'cart' }">
       <div class="v-catalog__link_to_cart">Cart: {{ CART.length }}</div>
     </router-link>
@@ -27,12 +30,14 @@
 import vCatalogItem from './v-catalog-item';
 import { mapActions, mapGetters } from 'vuex';
 import vSelect from '@/components/v-select';
+import vNotification from '@/components/notification/v-notification'
 
 export default {
   name: "v-catalog",
   components: {
     vCatalogItem,
     vSelect,
+    vNotification
   },
   props: {},
   data() {
@@ -45,7 +50,8 @@ export default {
       selected: 'Все',
       filtredProducts: [],
       minPrice: 0,
-      maxPrice: 1000
+      maxPrice: 1000,
+      messages: []
     }
   },
   computed: {
@@ -69,7 +75,13 @@ export default {
       'ADD_TO_CART'
     ]),
     addToCart(data) {
-      this.ADD_TO_CART(data);
+      this.ADD_TO_CART(data)
+        .then(() => {
+          let timeStamp = Date.now().toLocaleString();
+          this.messages.unshift(
+            { name: "Товар добавлен в корзину", icon: 'check_circle', id: timeStamp }
+          )
+        })
     },
     setRangeSliders() {
       if (this.minPrice > this.maxPrice) {

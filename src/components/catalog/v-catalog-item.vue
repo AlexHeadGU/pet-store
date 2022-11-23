@@ -13,7 +13,7 @@
 
     <img class="v-catalog-item__image" :src="require('@/assets/images/' + product_data.image)" alt="img">
     <p class="v-catalog-item__name">{{ product_data.name }}</p>
-    <p class="v-catalog-item__price">Price: {{ product_data.price }} P.</p>
+    <p class="v-catalog-item__price">Price: {{ formattedPrice }}</p>
     <button class="v-catalog-item__show-info" @click="showPopupInfo">Show info</button>
     <button class="v-catalog-item__add_to_cart_btn btn" @click="addToCart">Add to cart</button>
   </div>
@@ -40,7 +40,14 @@ export default {
       isInfoPopupVisible: false
     }
   },
-  computed: {},
+  computed: {
+    formattedPrice() {
+      let parts = this.product_data.price.toFixed(2).toString().split('.');
+      parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+      return parts.join(".") + ' ₽';
+    },
+  },
+
   methods: {
     showPopupInfo() {
       this.isInfoPopupVisible = true

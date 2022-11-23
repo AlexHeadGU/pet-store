@@ -9,7 +9,7 @@
       @deleteFromCart="deleteFromCart(index)" @increment="increment(index)" @decrement="decrement(index)" />
     <div class="v-cart__total">
       <p class="total__name">Total:</p>
-      <p>{{ cartTotalCost }} Р.</p>
+      <p>{{ cartTotalCost }} ₽</p>
     </div>
   </div>
 </template>
