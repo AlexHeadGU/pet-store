@@ -7,14 +7,16 @@
       <div>
         <p class="v-catalog-item__name">{{ product_data.name }}</p>
         <p class="v-catalog-item__price">Price: {{ product_data.price }} P.</p>
-        <p class="-catalog-item__price">{{ product_data.category }} </p>
+        <p class="v-catalog-item__category">{{ product_data.category }} </p>
       </div>
     </v-popup>
 
-    <img class="v-catalog-item__image" :src="require('@/assets/images/' + product_data.image)" alt="img">
+    <img class="v-catalog-item__image" :src="require('@/assets/images/' + product_data.image)" alt="img"
+      @click="productClick">
     <p class="v-catalog-item__name">{{ product_data.name }}</p>
     <p class="v-catalog-item__price">Price: {{ formattedPrice }}</p>
     <button class="v-catalog-item__show-info" @click="showPopupInfo">Show info</button>
+    <br>
     <button class="v-catalog-item__add_to_cart_btn btn" @click="addToCart">Add to cart</button>
   </div>
 </template>
@@ -49,6 +51,9 @@ export default {
   },
 
   methods: {
+    productClick() {
+      this.$emit('productClick', this.product_data.article);
+    },
     showPopupInfo() {
       this.isInfoPopupVisible = true
     },

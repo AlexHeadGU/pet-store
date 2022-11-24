@@ -21,7 +21,7 @@
     </div>
     <div class="v-catalog__list">
       <v-catalog-item v-for="product in sortedProducts" :key="product.article" :product_data="product"
-        @addToCart="addToCart" />
+        @addToCart="addToCart" @productClick="productClick" />
     </div>
   </div>
 </template>
@@ -75,6 +75,14 @@ export default {
       'GET_PRODUCTS_FROM_API',
       'ADD_TO_CART'
     ]),
+    productClick(article) {
+      this.$router.push({
+        name: 'product',
+        query: {
+          'product': article
+        }
+      })
+    },
     addToCart(data) {
       this.ADD_TO_CART(data)
         .then(() => {
