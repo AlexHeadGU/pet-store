@@ -11,8 +11,8 @@
       <v-select :selected="selected" :options="categories" @selectOption="filterByCategories"
         :isExpanded="IS_DESKTOP" />
       <div class="range-slider">
-        <input type="range" min="0" max="1000" step="10" v-model.number="minPrice" @change="setRangeSliders">
-        <input type="range" min="0" max="1000" step="10" v-model.number="maxPrice" @change="setRangeSliders">
+        <input type="range" min="0" max="10000" step="100" v-model.number="minPrice" @change="setRangeSliders">
+        <input type="range" min="0" max="10000" step="100" v-model.number="maxPrice" @change="setRangeSliders">
       </div>
       <div class="range-values">
         <p>Min: {{ minPrice }}</p>
@@ -37,7 +37,7 @@ export default {
   components: {
     vCatalogItem,
     vSelect,
-    vNotification
+    vNotification,
   },
   props: {},
   data() {
@@ -50,7 +50,7 @@ export default {
       selected: 'Все',
       filtredProducts: [],
       minPrice: 0,
-      maxPrice: 1000,
+      maxPrice: 10000,
       messages: []
     }
   },
@@ -59,7 +59,8 @@ export default {
       'PRODUCTS',
       'CART',
       'IS_MOBILE',
-      'IS_DESKTOP'
+      'IS_DESKTOP',
+      'SEARCH_VALUE'
     ]),
     sortedProducts() {
       if (this.filtredProducts.length) {
@@ -103,6 +104,21 @@ export default {
           return e.category === category.name;
         })
       }
+    },
+    filterProductsBySearchValue(value) {
+      this.filtredProducts = [...this.PRODUCTS]
+      if (value) {
+        this.filtredProducts = this.filtredProducts.filter((item) => {
+          return item.name.toLowerCase().includes(value.toLowerCase());
+        })
+      } else {
+        this.filtredProducts = this.PRODUCTS;
+      }
+    }
+  },
+  watch: {
+    SEARCH_VALUE() {
+      this.filterProductsBySearchValue(this.SEARCH_VALUE)
     }
   },
   mounted() {
@@ -111,6 +127,7 @@ export default {
         if (response.data) {
           console.log('Data arrived!');
           this.filterByCategories();
+          this.filterProductsBySearchValue(this.SEARCH_VALUE);
         }
       })
   }
@@ -128,7 +145,7 @@ export default {
 
   &__link_to_cart {
     position: fixed;
-    top: 10px;
+    top: 82px;
     right: 10px;
     padding: $padding*2;
     border: solid 1px #aeaeae;

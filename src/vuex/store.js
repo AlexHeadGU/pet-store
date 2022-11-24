@@ -9,6 +9,7 @@ const actions = {...commonActions, ... apiRequests}
 const store = createStore({
   state() {
     return {
+      searchValue: '',
       isMobile: false,
       isDesktop: true,
       products: [],
